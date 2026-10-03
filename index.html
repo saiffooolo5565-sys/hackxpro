@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HACKER X PRO</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New',monospace}
+body{background:#000;color:#0f0;min-height:100vh;overflow-x:hidden}
+.screen{display:none;min-height:100vh;padding:20px}
+.screen.active{display:block}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(circle,#001a00,#000)}
+.login-box{width:100%;max-width:380px;background:#000;border:2px solid #0f0;border-radius:15px;padding:25px;box-shadow:0 0 30px rgba(0,255,0,.4);text-align:center}
+.logo{font-size:70px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.login-box h1{color:#0f0;font-size:22px;margin:10px 0;text-shadow:0 0 15px #0f0;letter-spacing:2px}
+.credit{color:#0a0;font-size:12px;margin-bottom:5px}
+.credit a{color:#0f0;text-decoration:none}
+.form{text-align:right;margin-top:20px}
+.form label{display:block;margin:12px 0 6px;color:#0f0;font-size:14px}
+.form input{width:100%;padding:12px;background:#001a00;border:1px solid #0f0;border-radius:8px;color:#0f0;font-size:14px}
+.form input:focus{outline:none;box-shadow:0 0 10px #0f0}
+.btn{width:100%;padding:14px;margin-top:20px;background:#0f0;color:#000;border:none;border-radius:8px;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 0 15px #0f0}
+.btn:active{transform:scale(.97)}
+#msg{margin-top:15px;min-height:20px;font-size:14px}
+.note{margin-top:20px;color:#0a0;font-size:11px}
+header{text-align:center;padding:20px;border-bottom:1px solid #003300}
+header h2{color:#0f0;text-shadow:0 0 10px #0f0;font-size:24px}
+.user{color:#0a0;font-size:12px;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:20px}
+.card{background:#001a00;border:2px solid #0f0;border-radius:15px;padding:25px 15px;text-align:center;color:#0f0;transition:.3s;box-shadow:0 0 15px rgba(0,255,0,.3);cursor:pointer}
+.card:active{transform:scale(.94);background:#003300;box-shadow:0 0 25px #0f0}
+.card .icon{font-size:55px;margin-bottom:10px}
+.card span{display:block;font-size:15px;font-weight:bold}
+footer{text-align:center;padding:25px 20px;color:#0a0;font-size:13px;border-top:1px solid #003300;margin-top:20px}
+footer a{color:#0f0;text-decoration:none}
+.small{font-size:11px;margin-top:8px;color:#050}
+.back{color:#0f0;text-decoration:none;font-size:16px;display:inline-block;margin-bottom:15px;cursor:pointer}
+.game-title{text-align:center;color:#0f0;margin-bottom:20px;font-size:22px;text-shadow:0 0 10px #0f0}
+.game-input{width:100%;padding:12px;background:#001a00;border:1px solid #0f0;border-radius:8px;color:#0f0;font-size:15px;margin-bottom:12px}
+#output{margin-top:20px;font-size:13px;line-height:1.9;word-break:break-word}
+.status{color:#ff0}
+.report{border:1px solid #0f0;padding:12px;border-radius:8px;margin-top:15px;background:#001a00}
+.report h3{color:#0f0;text-align:center;margin-bottom:10px}
+.report hr{border-color:#0f0;margin:10px 0}
+.report div{padding:3px 0}
+</style>
+</head>
+<body>
+
+<div class="screen active" id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="logo">💀</div>
+      <h1>HACKER X PRO</h1>
+      <p class="credit">Ghost Cipher © 2026</p>
+      <p class="credit">📢 <a href="https://t.me/bayt_hon" target="_blank">قناة المطور</a></p>
+      <div class="form">
+        <label>🔑 التوكن (Bot Token)</label>
+        <input type="text" id="token" placeholder="ضع التوكن هنا">
+        <label>🆔 الأيدي (Chat ID)</label>
+        <input type="text" id="chatid" placeholder="ضع الأيدي هنا">
+        <button class="btn" onclick="doLogin()">🔓 تسجيل الدخول</button>
+      </div>
+      <div id="msg"></div>
+      <p class="note">© 2026 Ghost Cipher | جميع الحقوق محفوظة</p>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="mainScreen">
+  <header>
+    <h2>💀 HACKER X PRO 💀</h2>
+    <p class="credit">Ghost Cipher © 2026</p>
+    <p class="user">👤 <span id="userInfo"></span></p>
+  </header>
+  <div class="grid">
+    <div class="card" onclick="openGame('pubg')"><div class="icon">🎮</div><span>ببجي موبايل</span></div>
+    <div class="card" onclick="openGame('roblox')"><div class="icon">🧱</div><span>روبلوكس</span></div>
+    <div class="card" onclick="openGame('ludo')"><div class="icon">🎲</div><span>لودو كينغ</span></div>
+    <div class="card" onclick="openGame('freefire')"><div class="icon">🔥</div><span>فري فاير</span></div>
+  </div>
+  <footer>
+    <p>📢 <a href="https://t.me/bayt_hon" target="_blank">قناة المطور</a></p>
+    <p class="small">© 2026 Ghost Cipher - All Rights Reserved</p>
+  </footer>
+</div>
+
+<div class="screen" id="gameScreen">
+  <a class="back" onclick="showScreen('mainScreen')">← رجوع</a>
+  <h2 class="game-title" id="gameTitle">🎮 تهكير</h2>
+  <input type="text" id="targetId" class="game-input" placeholder="ID اللاعب">
+  <button class="btn" onclick="startHack()">🔓 ابدأ الاختراق</button>
+  <div id="output"></div>
+</div>
+
+<script>
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function doLogin(){
+  const t = document.getElementById('token').value.trim();
+  const c = document.getElementById('chatid').value.trim();
+  const m = document.getElementById('msg');
+  if(!t || !c){ m.innerHTML='<span style="color:#f00">❌ املأ الحقول أولاً!</span>'; return; }
+  m.innerHTML='<span style="color:#ff0">⏳ جاري التحقق...</span>';
+  const steps=["الاتصال بالسيرفر","التحقق من التوكن","ربط الحساب","تشفير القناة"];
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i<steps.length){ m.innerHTML=`<span style="color:#ff0">[*] ${steps[i]}...</span>`; i++; }
+    else{
+      clearInterval(timer);
+      m.innerHTML='<span style="color:#0f0">✅ تم الدخول بنجاح!</span>';
+      localStorage.setItem('token',t);
+      localStorage.setItem('chatid',c);
+      setTimeout(()=>{
+        document.getElementById('userInfo').innerText='ID: '+c;
+        showScreen('mainScreen');
+      },1000);
+    }
+  },700);
+}
+
+window.onload=()=>{
+  if(localStorage.getItem('token') && localStorage.getItem('chatid')){
+    document.getElementById('userInfo').innerText='ID: '+localStorage.getItem('chatid');
+    showScreen('mainScreen');
+  }
+};
+
+function rand(a,b){ return Math.floor(Math.random()*(b-a))+a; }
+function pass(n){ const c="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; let p=""; for(let i=0;i<n;i++)p+=c[rand(0,c.length)]; return p; }
+
+const games = {
+  pubg: {
+    title: "🎮 تهكير PUBG Mobile",
+    placeholder: "ID اللاعب",
+    steps: ["الاتصال بسيرفر PUBG الرئيسي","تجاوز حماية Tencent","سحب بيانات الحساب","فك تشفير كلمة السر","استخراج UC وال skins","سحب الإيميل المربوط","استخراج رقم الهاتف","تجاوز المصادقة الثنائية","إنشاء باب خلفي","تدمير أدلة الدخول"],
+    results: id => ({
+      "🆔 ID": id,
+      "👤 الاسم": "ProGamer_"+rand(1000,9999),
+      "📧 الإيميل": "player"+rand(1000,9999)+"@gmail.com",
+      "🔑 كلمة السر": pass(12),
+      "📱 الهاتف": "+964"+rand(7000000000,7999999999),
+      "💰 UC": rand(500,50000),
+      "🏆 الرانك": "Conqueror",
+      "🌍 الدولة": "Iraq",
+      "⭐ الحالة": "مخترق ✅"
+    })
+  },
+  roblox: {
+    title: "🧱 تهكير Roblox",
+    placeholder: "اسم المستخدم",
+    steps: ["الاتصال بسيرفر Roblox","تجاوز Roblox Anti-Cheat","اختراق نظام الحسابات","سحب الـ Robux","استخراج الـ Inventory","فك تشفير الإيميل","تجاوز PIN الأبوي","تحميل قائمة الأصدقاء","إنشاء وصول دائم","مسح سجل الدخول"],
+    results: u => ({
+      "👤 الاسم": u,
+      "🆔 User ID": rand(100000000,999999999),
+      "💰 Robux": rand(100,100000)+" R$",
+      "📧 الإيميل": u.toLowerCase()+"@gmail.com",
+      "🔑 كلمة السر": pass(14),
+      "🎂 العمر": rand(8,25)+" سنة",
+      "🎨 Items": rand(50,500)+" item",
+      "👥 الأصدقاء": rand(10,800)+" صديق",
+      "⭐ الحالة": "مخترق ✅"
+    })
+  },
+  ludo: {
+    title: "🎲 تهكير Ludo King",
+    placeholder: "ID اللاعب",
+    steps: ["الاتصال بسيرفر Ludo King","تجاوز حماية Gametion","اختراق قاعدة البيانات","سحب محفظة الجواهر","فك تشفير الحساب","استخراج الإيميل","تجاوز Google/Facebook login","تحميل البيانات الكاملة","إنشاء وصول دائم"],
+    results: id => ({
+      "🆔 ID": id,
+      "👤 الاسم": "LudoMaster_"+rand(100,999),
+      "💎 الجواهر": rand(1000,100000),
+      "🪙 الكوينز": rand(10000,999999),
+      "📧 الإيميل": "ludo"+rand(1000,9999)+"@yahoo.com",
+      "🔑 كلمة السر": pass(10),
+      "📱 الهاتف": "+964"+rand(7000000000,7999999999),
+      "🏆 الفوزات": rand(500,5000)+" مباراة",
+      "⭐ الحالة": "مخترق ✅"
+    })
+  },
+  freefire: {
+    title: "🔥 تهكير Free Fire",
+    placeholder: "ID اللاعب",
+    steps: ["الاتصال بسيرفر Garena","تجاوز حماية Free Fire","سحب بيانات الحساب","فك تشفير كلمة السر","استخراج الجواهر","سحب الإيميل","استخراج رقم الهاتف","تجاوز 2FA","إنشاء وصول دائم"],
+    results: id => ({
+      "🆔 ID": id,
+      "👤 الاسم": "FF_Pro_"+rand(1000,9999),
+      "📧 الإيميل": "ff"+rand(1000,9999)+"@gmail.com",
+      "🔑 كلمة السر": pass(12),
+      "📱 الهاتف": "+964"+rand(7000000000,7999999999),
+      "💎 الجواهر": rand(500,50000),
+      "🏆 الرانك": "Grandmaster",
+      "🎨 Skins": rand(50,300),
+      "⭐ الحالة": "مخترق ✅"
+    })
+  }
+};
+
+let currentGame = null;
+
+function openGame(key){
+  currentGame = key;
+  const g = games[key];
+  document.getElementById('gameTitle').innerText = g.title;
+  document.getElementById('targetId').placeholder = g.placeholder;
+  document.getElementById('targetId').value = "";
+  document.getElementById('output').innerHTML = "";
+  showScreen('gameScreen');
+}
+
+function startHack(){
+  const g = games[currentGame];
+  const id = document.getElementById('targetId').value.trim() || String(rand(100000000,999999999));
+  const out = document.getElementById('output');
+  out.innerHTML = `<div class="status">[*] الهدف: ${id}</div>`;
+  let i = 0;
+  const timer = setInterval(()=>{
+    if(i < g.steps.length){
+      out.innerHTML += `<div class="status">[*] ${g.steps[i]}...</div>`;
+      i++;
+    } else {
+      clearInterval(timer);
+      const results = g.results(id);
+      let html = `<div class="report"><h3>✅ تم الاختراق بنجاح!</h3><hr>`;
+      for(const [k,v] of Object.entries(results)){
+        html += `<div>${k}: <span style="color:#fff">${v}</span></div>`;
+      }
+      html += `</div><div id="sendMsg" style="margin-top:15px;color:#ff0;">📡 جاري الإرسال للتليجرام...</div>`;
+      out.innerHTML += html;
+      setTimeout(()=>{
+        const cid = localStorage.getItem('chatid') || 'غير معروف';
+        document.getElementById('sendMsg').innerHTML = `✅ <span style="color:#0f0">تم الإرسال للتليجرام!</span><br>🆔 Chat ID: ${cid}<br>📦 النوع: ${currentGame.toUpperCase()}<br>🕐 ${new Date().toLocaleTimeString()}`;
+      }, 2500);
+    }
+  }, 700);
+}
+</script>
+</body>
+</html>
